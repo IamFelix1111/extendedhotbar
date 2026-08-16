@@ -1,31 +1,39 @@
 {
-	"schemaVersion": 1,
-	"id": "extendedhotbar",
-	"version": "${version}",
-	"name": "ExtendedHotbar",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/extendedhotbar/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"com.extendedhotbar.ExtendedHotbar"
-		]
-	},
-	"mixins": [
-		"extendedhotbar.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.19.3",
-		"minecraft": "~1.21.11",
-		"java": ">=21",
-		"fabric-api": "*"
-	}
+  "schemaVersion": 1,
+  "id": "extendedhotbar",
+  "version": "${version}",
+  "name": "Extended Hotbar",
+  "description": "Place the bottom bar of the player's inventory above the hotbar.",
+  "authors": [
+    "IamFelix"
+  ],
+  "contributors": [
+    "DenWav (original author)",
+    "unilock"
+  ],
+  "contact": {
+    "sources": "https://github.com/IamFelix1111/extendedhotbar",
+    "homepage": "https://github.com/IamFelix1111/extendedhotbar",
+    "issues": "https://github.com/IamFelix1111/extendedhotbar/issues"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/extendedhotbar/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.extendedhotbar.client.ExtendedHotbarClient"
+    ],
+    "modmenu": [
+      "com.extendedhotbar.client.ExtendedHotbarMenu"
+    ]
+  },
+  "mixins": [
+    "extendedhotbar.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-key-binding-api-v1": "*"
+  }
 }
