@@ -19,18 +19,16 @@ package com.extendedhotbar;
 
 import me.shedaniel.autoconfig.ConfigHolder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.inventory.ClickType;
 import org.joml.Matrix3x2fStack;
 
+import java.util.concurrent.CompletableFuture;
+
 public final class Util {
 
     public static final int LEFT_BOTTOM_ROW_SLOT_INDEX = 27;
-
-    private static final int LEFT_HOTBAR_SLOT_INDEX = 36;
-    private static final int BOTTOM_RIGHT_CRAFTING_SLOT_INDEX = 4;
 
     public static final int DISTANCE = -22;
 
@@ -39,8 +37,6 @@ public final class Util {
     public static ConfigHolder<ModConfig> configHolder = null;
 
     public static ConfigHolder<ExtendedHotbarState> stateHolder = null;
-
-    private static boolean swapRender = false;
 
     private Util() {}
 
@@ -71,33 +67,6 @@ public final class Util {
         return stateHolder.getConfig().position;
     }
 
-    public static ExtendedHotbarState.Position getRenderedFluentPosition() {
-        if (stateHolder == null) {
-            return ExtendedHotbarState.Position.LEFT;
-        }
-        final ExtendedHotbarState state = stateHolder.getConfig();
-        if (swapRender) {
-            return switch (state.position) {
-                case LEFT -> ExtendedHotbarState.Position.RIGHT ;
-                case RIGHT -> ExtendedHotbarState.Position.LEFT;
-            };
-        } else {
-            return state.position;
-        }
-    }
-
-    public static void swapRenderedPosition() {
-        swapRender = true;
-    }
-
-    public static boolean isRenderSwapped() {
-        return swapRender;
-    }
-
-    public static void resetRenderedPosition() {
-        swapRender = false;
-    }
-
     public static void switchFluentPosition() {
         if (stateHolder == null) {
             return;
@@ -106,7 +75,8 @@ public final class Util {
             case LEFT -> ExtendedHotbarState.Position.RIGHT;
             case RIGHT -> ExtendedHotbarState.Position.LEFT;
         };
-        stateHolder.save();
+        // Save off-thread to avoid a synchronous disk write stalling the render tick.
+        CompletableFuture.runAsync(stateHolder::save);
     }
 
     public static void moveUp(final Matrix3x2fStack poseStack) {
@@ -123,30 +93,19 @@ public final class Util {
         if (player == null) {
             return;
         }
-
-        final InventoryScreen inventory = new InventoryScreen(player);
-        final int syncId = inventory.getMenu().containerId;
-
-        if (fullRow) {
-            swapRows(client, syncId);
-        } else {
-            final MultiPlayerGameMode interactionManager = client.gameMode;
-            if (interactionManager != null) {
-                final int currentItem = player.getInventory().getSelectedSlot();
-                swapItem(interactionManager, player, syncId, currentItem);
-            }
-        }
-    }
-
-    private static void swapRows(final Minecraft client, final int syncId) {
         final MultiPlayerGameMode interactionManager = client.gameMode;
-        final LocalPlayer player = client.player;
-        if (interactionManager == null || player == null)  {
+        if (interactionManager == null) {
             return;
         }
 
-        for (int i = 0; i < 9; i++) {
-            swapItem(interactionManager, player, syncId, i);
+        final int syncId = player.inventoryMenu.containerId;
+
+        if (fullRow) {
+            for (int i = 0; i < 9; i++) {
+                swapItem(interactionManager, player, syncId, i);
+            }
+        } else {
+            swapItem(interactionManager, player, syncId, player.getInventory().getSelectedSlot());
         }
     }
 
@@ -156,20 +115,9 @@ public final class Util {
         final int syncId,
         final int slotId
     ) {
-        /*
-         * Implementation note:
-         * There are fancy click mechanisms to swap item stacks without using a temporary slot, but when swapping between two identical item
-         * stacks, things can get messed up. Using a temporary slot that we know is guaranteed to be empty is the safest option.
-         */
-
-        // Move hotbar item to crafting slot
-        interactionManager.handleInventoryMouseClick(syncId, slotId + Util.LEFT_HOTBAR_SLOT_INDEX, 0, ClickType.PICKUP, player);
-        interactionManager.handleInventoryMouseClick(syncId, Util.BOTTOM_RIGHT_CRAFTING_SLOT_INDEX, 0, ClickType.PICKUP, player);
-        // Move bottom row item to hotbar
-        interactionManager.handleInventoryMouseClick(syncId, slotId + Util.LEFT_BOTTOM_ROW_SLOT_INDEX, 0, ClickType.PICKUP, player);
-        interactionManager.handleInventoryMouseClick(syncId, slotId + Util.LEFT_HOTBAR_SLOT_INDEX, 0, ClickType.PICKUP, player);
-        // Move crafting slot item to bottom row
-        interactionManager.handleInventoryMouseClick(syncId, Util.BOTTOM_RIGHT_CRAFTING_SLOT_INDEX, 0, ClickType.PICKUP, player);
-        interactionManager.handleInventoryMouseClick(syncId, slotId + Util.LEFT_BOTTOM_ROW_SLOT_INDEX, 0, ClickType.PICKUP, player);
+        // Swaps hotbar slot `slotId` (inventory index 0-8) with the bottom-row slot directly below it
+        // (inventory index slotId + 27) using the number-key swap click. This is a single atomic click
+        // per slot, far cheaper than the multi-click pickup sequence and safe for identical item stacks.
+        interactionManager.handleInventoryMouseClick(syncId, slotId + Util.LEFT_BOTTOM_ROW_SLOT_INDEX, slotId, ClickType.SWAP, player);
     }
 }

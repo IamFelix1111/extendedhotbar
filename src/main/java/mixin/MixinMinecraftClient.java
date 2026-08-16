@@ -19,7 +19,9 @@ package com.extendedhotbar.mixin;
 
 import com.extendedhotbar.Util;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -32,6 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -43,6 +46,9 @@ public abstract class MixinMinecraftClient {
     @Shadow public HitResult hitResult;
     @Shadow public ClientLevel level;
     @Shadow public LocalPlayer player;
+    @Shadow public Options options;
+
+    @Unique private int hotbarKeyWasDownMask;
 
     @Inject(
         method = "pickBlock",
@@ -109,7 +115,22 @@ public abstract class MixinMinecraftClient {
         )
     )
     private void handleKeybinds(final CallbackInfo ci, @Local(ordinal = 0) final int loopIndex) {
-        if (!Util.configHolder.getConfig().enableDoubleTap) {
+        if (!Util.configHolder.getConfig().enableDoubleTap || Util.isFluent()) {
+            // In fluent mode, pressing a hotbar slot key just selects the slot; no swap.
+            return;
+        }
+
+        // Edge detection: only swap on the initial press, not while the key is held.
+        final KeyMapping keyMapping = this.options.keyHotbarSlots[loopIndex];
+        final boolean down = keyMapping.isDown();
+        final boolean pressed = down && (this.hotbarKeyWasDownMask & (1 << loopIndex)) == 0;
+        if (down) {
+            this.hotbarKeyWasDownMask |= 1 << loopIndex;
+        } else {
+            this.hotbarKeyWasDownMask &= ~(1 << loopIndex);
+        }
+
+        if (!pressed) {
             return;
         }
 

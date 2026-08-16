@@ -83,7 +83,7 @@ public abstract class MixinInGameHudFluent {
             return x;
         }
 
-        final Position position = Util.getRenderedFluentPosition();
+        final Position position = Util.getFluentPosition();
         return switch (position) {
             case LEFT -> x - this.offset;
             case RIGHT -> x + this.offset;
@@ -115,7 +115,7 @@ public abstract class MixinInGameHudFluent {
             return;
         }
 
-        final Position position = Util.getRenderedFluentPosition();
+        final Position position = Util.getFluentPosition();
 
         final int originalX;
         final int newX;

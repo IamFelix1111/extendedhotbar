@@ -28,14 +28,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.client.gui.screens.inventory.HorseInventoryScreen;
-import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.resources.Identifier;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -66,6 +60,10 @@ public class ExtendedHotbarClient implements ClientModInitializer {
         CATEGORY
     );
 
+    private boolean swapKeyWasDown;
+    private boolean toggleKeyWasDown;
+    private boolean fluentKeyWasDown;
+
     @Override
     public void onInitializeClient() {
         KeyBindingHelper.registerKeyBinding(swapKeyBinding);
@@ -77,32 +75,42 @@ public class ExtendedHotbarClient implements ClientModInitializer {
         Util.stateHolder = AutoConfig.register(ExtendedHotbarState.class, Toml4jConfigSerializer::new);
 
         ClientTickEvents.END_CLIENT_TICK.register(this::onTick);
-        ScreenEvents.BEFORE_INIT.register(this::onScreenOpen);
     }
 
     private void onTick(final Minecraft client) {
         final ModConfig config = Util.configHolder.getConfig();
-        if (toggleKeyBinding.consumeClick()) {
+
+        // Edge detection via isDown() instead of consumeClick(). consumeClick() is fed by both
+        // press AND repeat events, so holding a key would otherwise retrigger the action every tick.
+        final boolean toggleDown = toggleKeyBinding.isDown();
+        final boolean togglePressed = toggleDown && !this.toggleKeyWasDown;
+        this.toggleKeyWasDown = toggleDown;
+
+        final boolean fluentDown = fluentKeyBinding.isDown();
+        final boolean fluentPressed = fluentDown && !this.fluentKeyWasDown;
+        this.fluentKeyWasDown = fluentDown;
+
+        final boolean swapDown = swapKeyBinding.isDown();
+        final boolean swapPressed = swapDown && !this.swapKeyWasDown;
+        this.swapKeyWasDown = swapDown;
+
+        if (togglePressed) {
             config.enabled = !config.enabled;
             Util.configHolder.save();
             return;
         }
 
-        if (fluentKeyBinding.consumeClick()) {
+        if (fluentPressed) {
             config.fluent = !config.fluent;
             Util.configHolder.save();
             return;
         }
 
-        if (!config.enabled || config.fluent) {
+        if (!swapPressed || !config.enabled || config.fluent) {
             return;
         }
 
         if (client.level == null || client.screen != null || client.options.hideGui) {
-            return;
-        }
-
-        if (!swapKeyBinding.consumeClick()) {
             return;
         }
 
@@ -121,32 +129,4 @@ public class ExtendedHotbarClient implements ClientModInitializer {
         Util.performSwap(client, singleSwap);
     }
 
-    private void onScreenOpen(
-        final Minecraft client,
-        final Screen screen,
-        final int scaledWidth,
-        final int scaledHeight
-    ) {
-        if (!(screen instanceof AbstractContainerScreen<?>) && !(screen instanceof HorseInventoryScreen)) {
-            return;
-        }
-        final MultiPlayerGameMode manager = client.gameMode;
-        if (manager != null && client.player != null && client.player.hasInfiniteMaterials()) {
-            if (!(screen instanceof CreativeModeInventoryScreen)) {
-                // Creative inventories are opened after the normal inventory is opened, so we want to ignore when
-                // the first one closes (the non-creative inventory).
-                // It goes setScreen(InventoryScreen) -> InventoryScreen.init() -> setScreen(CreativeInventoryScreen)
-                return;
-            }
-        }
-        ScreenEvents.remove(screen).register(this::onScreenClose);
-    }
-
-    private void onScreenClose(final Screen screen) {
-        if (Util.isRenderSwapped()) {
-            // swap back
-            Util.resetRenderedPosition();
-            Util.performSwap(Minecraft.getInstance(), true);
-        }
-    }
 }
