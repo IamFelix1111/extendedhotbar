@@ -59,10 +59,18 @@ public class ExtendedHotbarClient implements ClientModInitializer {
         CATEGORY
     );
 
+    private static final KeyMapping fluentKeyBinding = new KeyMapping(
+        "key.extendedhotbar.fluent",
+        InputConstants.Type.KEYSYM,
+        GLFW_KEY_V,
+        CATEGORY
+    );
+
     @Override
     public void onInitializeClient() {
         KeyBindingHelper.registerKeyBinding(swapKeyBinding);
         KeyBindingHelper.registerKeyBinding(toggleKeyBinding);
+        KeyBindingHelper.registerKeyBinding(fluentKeyBinding);
 
         Util.configHolder = AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
         // Use "config" to hold state because it's simple
@@ -76,6 +84,12 @@ public class ExtendedHotbarClient implements ClientModInitializer {
         final ModConfig config = Util.configHolder.getConfig();
         if (toggleKeyBinding.consumeClick()) {
             config.enabled = !config.enabled;
+            Util.configHolder.save();
+            return;
+        }
+
+        if (fluentKeyBinding.consumeClick()) {
+            config.fluent = !config.fluent;
             Util.configHolder.save();
             return;
         }

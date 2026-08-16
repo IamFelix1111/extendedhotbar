@@ -1,0 +1,17 @@
+{
+  "key.extendedhotbar.switch": "Échanger la barre",
+  "key.extendedhotbar.toggle": "Activer/désactiver la barre étendue",
+  "key.extendedhotbar.fluent": "Basculer le mode fluide",
+  "key.category.extendedhotbar.extendedhotbar": "Barre étendue",
+  "text.autoconfig.extendedhotbar.title": "Barre étendue",
+  "text.autoconfig.extendedhotbar.option.enabled": "Activé",
+  "text.autoconfig.extendedhotbar.option.enabled.@Tooltip": "Activer ou désactiver la barre étendue",
+  "text.autoconfig.extendedhotbar.option.invert": "Inverser l'échange ligne complète / objet unique",
+  "text.autoconfig.extendedhotbar.option.invert.@Tooltip": "Inverser l'échange ligne complète / objet unique",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap": "Activer l'échange par double appui",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap.@Tooltip": "Double appui sur une touche d'emplacement pour n'échanger que cet emplacement",
+  "text.autoconfig.extendedhotbar.option.enableModifier": "Activer la touche de modification Maj",
+  "text.autoconfig.extendedhotbar.option.enableModifier.@Tooltip": "Maintenir Maj pour changer le comportement d'échange",
+  "text.autoconfig.extendedhotbar.option.fluent": "Activer le mode fluide (désactive l'échange manuel)",
+  "text.autoconfig.extendedhotbar.option.fluent.@Tooltip": "La seconde barre est affichée à côté de la barre standard"
+}

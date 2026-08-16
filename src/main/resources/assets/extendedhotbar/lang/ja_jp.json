@@ -1,0 +1,17 @@
+{
+  "key.extendedhotbar.switch": "ホットバーを入れ替え",
+  "key.extendedhotbar.toggle": "拡張ホットバーの切り替え",
+  "key.extendedhotbar.fluent": "フルーエントモードの切り替え",
+  "key.category.extendedhotbar.extendedhotbar": "拡張ホットバー",
+  "text.autoconfig.extendedhotbar.title": "拡張ホットバー",
+  "text.autoconfig.extendedhotbar.option.enabled": "有効",
+  "text.autoconfig.extendedhotbar.option.enabled.@Tooltip": "拡張ホットバーをオン／オフにする",
+  "text.autoconfig.extendedhotbar.option.invert": "全行／単一アイテムの入れ替えを反転",
+  "text.autoconfig.extendedhotbar.option.invert.@Tooltip": "全行／単一アイテムの入れ替えを反転",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap": "ダブルタップでの入れ替えを有効にする",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap.@Tooltip": "ホットバーのスロットキーをダブルタップしてそのスロットのみ入れ替える",
+  "text.autoconfig.extendedhotbar.option.enableModifier": "Shift 修飾キーを有効にする",
+  "text.autoconfig.extendedhotbar.option.enableModifier.@Tooltip": "Shift を押しながらでアイテム入れ替えの動作を変更する",
+  "text.autoconfig.extendedhotbar.option.fluent": "フルーエントモードを有効にする（手動入れ替えを無効化）",
+  "text.autoconfig.extendedhotbar.option.fluent.@Tooltip": "2つ目のホットバーを標準ホットバーと並べて表示"
+}

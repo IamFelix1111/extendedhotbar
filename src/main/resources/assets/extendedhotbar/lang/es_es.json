@@ -1,0 +1,17 @@
+{
+  "key.extendedhotbar.switch": "Intercambiar barra",
+  "key.extendedhotbar.toggle": "Activar/desactivar barra extendida",
+  "key.extendedhotbar.fluent": "Cambiar modo fluido",
+  "key.category.extendedhotbar.extendedhotbar": "Barra extendida",
+  "text.autoconfig.extendedhotbar.title": "Barra extendida",
+  "text.autoconfig.extendedhotbar.option.enabled": "Activado",
+  "text.autoconfig.extendedhotbar.option.enabled.@Tooltip": "Activar o desactivar la barra extendida",
+  "text.autoconfig.extendedhotbar.option.invert": "Invertir intercambio de fila completa / objeto individual",
+  "text.autoconfig.extendedhotbar.option.invert.@Tooltip": "Invertir intercambio de fila completa / objeto individual",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap": "Activar intercambio con doble pulsación",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap.@Tooltip": "Doble pulsación en una tecla de ranura para intercambiar solo esa ranura",
+  "text.autoconfig.extendedhotbar.option.enableModifier": "Activar tecla modificadora Shift",
+  "text.autoconfig.extendedhotbar.option.enableModifier.@Tooltip": "Mantener Shift para cambiar el comportamiento de intercambio",
+  "text.autoconfig.extendedhotbar.option.fluent": "Activar modo fluido (desactiva el intercambio manual)",
+  "text.autoconfig.extendedhotbar.option.fluent.@Tooltip": "La segunda barra se muestra junto a la barra estándar"
+}

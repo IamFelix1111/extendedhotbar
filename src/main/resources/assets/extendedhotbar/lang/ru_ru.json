@@ -1,0 +1,17 @@
+{
+  "key.extendedhotbar.switch": "Поменять панель",
+  "key.extendedhotbar.toggle": "Вкл./выкл. расширенную панель",
+  "key.extendedhotbar.fluent": "Переключить плавный режим",
+  "key.category.extendedhotbar.extendedhotbar": "Расширенная панель",
+  "text.autoconfig.extendedhotbar.title": "Расширенная панель",
+  "text.autoconfig.extendedhotbar.option.enabled": "Включено",
+  "text.autoconfig.extendedhotbar.option.enabled.@Tooltip": "Включить или выключить расширенную панель",
+  "text.autoconfig.extendedhotbar.option.invert": "Инвертировать обмен всей строки / одного предмета",
+  "text.autoconfig.extendedhotbar.option.invert.@Tooltip": "Инвертировать обмен всей строки / одного предмета",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap": "Включить обмен двойным нажатием",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap.@Tooltip": "Двойное нажатие клавиши слота панели меняет только этот слот",
+  "text.autoconfig.extendedhotbar.option.enableModifier": "Включить клавишу-модификатор Shift",
+  "text.autoconfig.extendedhotbar.option.enableModifier.@Tooltip": "Удержание Shift изменяет поведение обмена предметами",
+  "text.autoconfig.extendedhotbar.option.fluent": "Включить плавный режим (отключает ручной обмен)",
+  "text.autoconfig.extendedhotbar.option.fluent.@Tooltip": "Вторая панель отображается рядом со стандартной"
+}

@@ -1,0 +1,17 @@
+{
+  "key.extendedhotbar.switch": "交换快捷栏",
+  "key.extendedhotbar.toggle": "开关扩展快捷栏",
+  "key.extendedhotbar.fluent": "切换流畅模式",
+  "key.category.extendedhotbar.extendedhotbar": "扩展快捷栏",
+  "text.autoconfig.extendedhotbar.title":  "扩展快捷栏",
+  "text.autoconfig.extendedhotbar.option.enabled": "启用",
+  "text.autoconfig.extendedhotbar.option.enabled.@Tooltip": "开启或关闭扩展快捷栏",
+  "text.autoconfig.extendedhotbar.option.invert": "反转整行/单个物品交换",
+  "text.autoconfig.extendedhotbar.option.invert.@Tooltip": "反转整行/单个物品交换",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap": "启用双击交换",
+  "text.autoconfig.extendedhotbar.option.enableDoubleTap.@Tooltip": "双击快捷栏槽位键仅交换该槽位的物品",
+  "text.autoconfig.extendedhotbar.option.enableModifier": "启用 Shift 修饰键",
+  "text.autoconfig.extendedhotbar.option.enableModifier.@Tooltip": "按住 Shift 改变物品交换行为",
+  "text.autoconfig.extendedhotbar.option.fluent": "启用流畅模式（禁用手动交换）",
+  "text.autoconfig.extendedhotbar.option.fluent.@Tooltip": "第二个快捷栏与标准快捷栏并排显示"
+}

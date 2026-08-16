@@ -1,6 +1,7 @@
 {
   "key.extendedhotbar.switch": "Swap Hotbar",
   "key.extendedhotbar.toggle": "Toggle Extended Hotbar",
+  "key.extendedhotbar.fluent": "Toggle Fluent Mode",
   "key.category.extendedhotbar.extendedhotbar": "Extended Hotbar",
   "text.autoconfig.extendedhotbar.title":  "Extended Hotbar",
   "text.autoconfig.extendedhotbar.option.enabled": "Enabled",
