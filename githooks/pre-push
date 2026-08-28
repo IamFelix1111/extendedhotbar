@@ -1,0 +1,47 @@
+#!/bin/sh
+# Before pushing this repo, if the web submodule has local changes,
+# commit them to the website repository and push.
+
+set -e
+
+top="$(git rev-parse --show-toplevel)"
+sub="$top/web"
+
+# Bail out if the submodule is not checked out.
+if ! git -C "$sub" rev-parse --git-dir >/dev/null 2>&1; then
+    exit 0
+fi
+
+# Sync the canonical icon into the website repo (copy only when content differs).
+icon_src="$top/icon.png"
+icon_dst="$sub/src/ExtendedHotbar/icon.png"
+if [ -f "$icon_src" ]; then
+    if ! cmp -s "$icon_src" "$icon_dst"; then
+        mkdir -p "$(dirname "$icon_dst")"
+        cp "$icon_src" "$icon_dst"
+        echo "[pre-push] icon.png synced to website repo."
+    fi
+fi
+
+# Bail out if there are no local changes.
+if [ -z "$(git -C "$sub" status --porcelain)" ]; then
+    exit 0
+fi
+
+echo "[pre-push] Changes detected in /web, committing to website repo..."
+
+git -C "$sub" add -A
+
+# Bail out if nothing ended up staged (e.g. only ignored files changed).
+if git -C "$sub" diff --cached --quiet; then
+    exit 0
+fi
+
+git -C "$sub" commit -m "ExtendedHotbar Website Changed"
+git -C "$sub" push origin HEAD:master
+
+# Stage the new submodule pointer so this repo records it on the next commit.
+git add web
+
+echo "[pre-push] Website repo pushed; 'web' pointer staged."
+echo "  Commit it with: git commit -m \"Update web submodule\""

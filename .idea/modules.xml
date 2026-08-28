@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/extendedhotbar.iml" filepath="$PROJECT_DIR$/.idea/modules/extendedhotbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/extendedhotbar.main.iml" filepath="$PROJECT_DIR$/.idea/modules/extendedhotbar.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/extendedhotbar.test.iml" filepath="$PROJECT_DIR$/.idea/modules/extendedhotbar.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/extendedhotbar.web.iml" filepath="$PROJECT_DIR$/.idea/modules/extendedhotbar.web.iml" />
     </modules>
   </component>
 </project>

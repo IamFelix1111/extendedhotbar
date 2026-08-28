@@ -1,0 +1,10 @@
+#!/bin/sh
+# After `git pull`/merge, auto-pull the web submodule,
+# then record the new submodule pointer in this repo.
+
+git submodule update --init --recursive --remote
+
+if ! git diff --quiet -- web; then
+    git add web
+    git commit -m "Update web submodule" -- web
+fi

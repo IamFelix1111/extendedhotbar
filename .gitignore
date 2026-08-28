@@ -9,13 +9,6 @@ classes/
 
 *.launch
 
-# idea
-
-#.idea/
-#*.iml
-#*.ipr
-#*.iws
-
 # vscode
 
 .settings/
@@ -39,6 +32,8 @@ replay_*.log
 *.hprof
 *.jfr
 
+# decompiled class files
+/decompiled-src
 
-
-/1.20.1
+# icon local junction
+/src/main/resources/assets/extendedhotbar/icon.png
