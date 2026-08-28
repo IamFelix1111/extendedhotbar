@@ -6,5 +6,5 @@ git submodule update --init --recursive --remote
 
 if ! git diff --quiet -- web; then
     git add web
-    git commit -m "Update web submodule" -- web
+    git commit -m "Update Web Submodule" -- web
 fi
