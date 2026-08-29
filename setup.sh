@@ -15,9 +15,9 @@ git submodule update --init --recursive
 gitdir="$(git -C web rev-parse --absolute-git-dir)"
 grep -qxF '*.iml' "$gitdir/info/exclude" 2>/dev/null || echo '*.iml' >> "$gitdir/info/exclude"
 
-echo "[setup] 2/4 Applying sparse-checkout (src/ExtendedHotbar + src/style.css)..."
+echo "[setup] 2/4 Applying sparse-checkout (src/ExtendedHotbar + src/style.css + src/i18n.js)..."
 # MSYS_NO_PATHCONV=1 prevents Git Bash from mangling the leading slash.
-MSYS_NO_PATHCONV=1 git -C web sparse-checkout set --no-cone /src/ExtendedHotbar/ /src/style.css
+MSYS_NO_PATHCONV=1 git -C web sparse-checkout set --no-cone /src/ExtendedHotbar/ /src/style.css /src/i18n.js
 
 echo "[setup] 3/4 Enabling git hooks..."
 git config core.hooksPath githooks

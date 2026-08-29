@@ -16,8 +16,8 @@ if errorlevel 1 goto :error
 REM Ignore IntelliJ module files locally (sparse-checkout hides the repo .gitignore).
 findstr /X /C:"*.iml" "%ROOT%.git\modules\web\info\exclude" >nul 2>&1 || echo *.iml>>"%ROOT%.git\modules\web\info\exclude"
 
-echo [setup] 2/4 Applying sparse-checkout (src/ExtendedHotbar + src/style.css)...
-git -C web sparse-checkout set --no-cone /src/ExtendedHotbar/ /src/style.css
+echo [setup] 2/4 Applying sparse-checkout (src/ExtendedHotbar + src/style.css + src/i18n.js)...
+git -C web sparse-checkout set --no-cone /src/ExtendedHotbar/ /src/style.css /src/i18n.js
 if errorlevel 1 goto :error
 
 echo [setup] 3/4 Enabling git hooks...

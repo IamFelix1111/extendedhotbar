@@ -12,8 +12,8 @@
     "unilock"
   ],
   "contact": {
-    "sources": "https://github.com/IamFelix1111/extendedhotbar",
-    "homepage": "https://github.com/IamFelix1111/extendedhotbar",
+    "sources": "https://github.com/IamFelix1111/extendedhotbar.git",
+    "homepage": "https://iamfelix1111.github.io/ExtendedHotbar",
     "issues": "https://github.com/IamFelix1111/extendedhotbar/issues"
   },
   "license": "LGPL-3.0-only",

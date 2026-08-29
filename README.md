@@ -1,40 +1,41 @@
-Extended Hotbar
-===============
+# Extended Hotbar
 
-Place the bottom bar of the player's inventory above the hotbar.
+A [Fabric](https://fabricmc.net/) mod for [Minecraft](https://www.minecraft.net/) that places the bottom row of your inventory above the hotbar, doubling your quick-access slots.
 
-* Press `R` to swap the rows
+Latest version: **1.0.1** for Minecraft **1.21.11**.
+
+## Features
+
+* Press `R` to swap the hotbar with the row above it.
 * Press `Shift+R` to swap only the items in your hand.
-* Press the key of your currently selected hotbar slot again to swap only that slot. (Disabled by default, via the "re-press to swap" option)
-* Press `=` to disable/enable
-* Press `V` to enable/disable fluent mode
+* Press the key of your currently selected hotbar slot again to swap just that slot.
+* Press `=` to enable or disable the mod.
+* Press `V` to toggle fluent mode.
 
-Hotkeys are configurable in the standard Minecraft controls settings.
+Hotkeys are configurable in the standard Minecraft controls settings, under the "Extended Hotbar" category.
 Key actions are edge-triggered, so holding a key down won't repeat the action.
 
-Additional configuration is in the mod's menu page. 
-[Mod Menu] is required for the extra configuration.
+Additional configuration is available on the mod's in-game configuration screen, which requires [Mod Menu].
 
 ## Fluent Mode
 
-Fluent mode can be enabled in the mod's config menu (using [Mod Menu]) or by pressing the `V` key. 
-This disables manual swapping using the `R` key, 
-and instead does the swapping transparently as the user scrolls along a double-wide hotbar, 
-created by rendering the second hotbar alongside the first, rather than on top.
+Fluent mode can be enabled on the mod's configuration screen (requires [Mod Menu]) or by pressing `V`.
+It disables manual swapping with `R` and instead swaps transparently as you scroll along a
+double-wide hotbar; the second row is rendered next to the first, rather than on top of it.
 
-While the secondary hotbar is selected, 
-opening the inventory or any container (chest, furnace, etc.) shows your items in their original rows, 
-and clicking or shift-clicking acts on the item you see. 
-This works in both single player and on servers, and in both survival and creative mode,
-including the creative inventory's item-grid tabs.
+While the secondary hotbar is selected, opening your inventory or any container
+(chest, furnace, etc.) shows your items in their original rows, and clicking or shift-clicking
+acts on the item you see. This works in single-player and on servers, and in both survival and
+creative mode, including the creative inventory's item-grid tabs.
 
 ## Requirements
 
 ### Required
 
+* [Minecraft](https://www.minecraft.net/) 1.21.11
 * [Fabric Loader](https://fabricmc.net/) 0.19.3 or newer
 * [Fabric API](https://modrinth.com/mod/fabric-api)
-* [Minecraft](https://www.minecraft.net/) 1.21.11
+* Java 21 or newer
 
 ### Optional
 
@@ -44,11 +45,11 @@ including the creative inventory's item-grid tabs.
 
 ### Bundled
 
-* [Cloth Config](https://modrinth.com/mod/cloth-config) — already bundled inside the mod jar, no separate installation needed
+* [Cloth Config](https://modrinth.com/mod/cloth-config) — included inside the mod jar, no separate installation needed
 
 ## Development Setup
 
-After cloning this repository, 
+After cloning this repository,
 run the setup script once to initialize the `web` submodule (the mod's documentation pages):
 
 * **Windows**: run `setup.cmd` (double-click it, or run `.\setup.cmd` in `cmd`).
