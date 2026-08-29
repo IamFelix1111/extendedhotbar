@@ -29,7 +29,6 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(MouseHandler.class)
 public abstract class MixinMouseHandlerFluent {
-
     @Shadow @Final private Minecraft minecraft;
 
     @WrapOperation(

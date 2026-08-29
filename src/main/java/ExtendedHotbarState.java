@@ -22,7 +22,6 @@ import me.shedaniel.autoconfig.annotation.Config;
 
 @Config(name = "extendedhotbar.fluent")
 public class ExtendedHotbarState implements ConfigData {
-
     public Position position = Position.LEFT;
 
     public enum Position {

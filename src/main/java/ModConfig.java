@@ -23,7 +23,6 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "extendedhotbar")
 public class ModConfig implements ConfigData {
-
     @ConfigEntry.Gui.Tooltip
     public boolean enabled = true;
 
@@ -34,7 +33,7 @@ public class ModConfig implements ConfigData {
     public boolean enableDoubleTap = false;
 
     @ConfigEntry.Gui.Tooltip
-    public boolean enableModifier = false;
+    public boolean enableModifier = true;
 
     @ConfigEntry.Gui.Tooltip
     public boolean fluent = false;

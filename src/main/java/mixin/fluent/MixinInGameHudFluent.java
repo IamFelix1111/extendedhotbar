@@ -36,7 +36,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(Gui.class)
 public abstract class MixinInGameHudFluent {
-
     @Unique private int offset;
 
     @WrapOperation(
@@ -79,9 +78,8 @@ public abstract class MixinInGameHudFluent {
         index = 2
     )
     private int drawHotbarSelection(final int x) {
-        if (this.offset == 0) {
+        if (this.offset == 0)
             return x;
-        }
 
         final Position position = Util.getFluentPosition();
         return switch (position) {

@@ -36,8 +36,8 @@ import static org.lwjgl.glfw.GLFW.*;
 
 @Environment(EnvType.CLIENT)
 public class ExtendedHotbarClient implements ClientModInitializer {
-
-    private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("extendedhotbar", "extendedhotbar"));
+    private static final KeyMapping.Category CATEGORY =
+            KeyMapping.Category.register(Identifier.fromNamespaceAndPath("extendedhotbar", "extendedhotbar"));
 
     private static final KeyMapping swapKeyBinding = new KeyMapping(
         "key.extendedhotbar.switch",
@@ -71,7 +71,6 @@ public class ExtendedHotbarClient implements ClientModInitializer {
         KeyBindingHelper.registerKeyBinding(fluentKeyBinding);
 
         Util.configHolder = AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
-        // Use "config" to hold state because it's simple
         Util.stateHolder = AutoConfig.register(ExtendedHotbarState.class, Toml4jConfigSerializer::new);
 
         ClientTickEvents.END_CLIENT_TICK.register(this::onTick);
@@ -80,8 +79,6 @@ public class ExtendedHotbarClient implements ClientModInitializer {
     private void onTick(final Minecraft client) {
         final ModConfig config = Util.configHolder.getConfig();
 
-        // Edge detection via isDown() instead of consumeClick(). consumeClick() is fed by both
-        // press AND repeat events, so holding a key would otherwise retrigger the action every tick.
         final boolean toggleDown = toggleKeyBinding.isDown();
         final boolean togglePressed = toggleDown && !this.toggleKeyWasDown;
         this.toggleKeyWasDown = toggleDown;
@@ -106,27 +103,22 @@ public class ExtendedHotbarClient implements ClientModInitializer {
             return;
         }
 
-        if (!swapPressed || !config.enabled || config.fluent) {
+        if (!swapPressed || !config.enabled || config.fluent)
             return;
-        }
 
-        if (client.level == null || client.screen != null || client.options.hideGui) {
+        if (client.level == null || client.screen != null || client.options.hideGui)
             return;
-        }
 
         boolean singleSwap;
         if (config.enableModifier) {
             final long window = client.getWindow().handle();
             singleSwap = glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) != GLFW_PRESS && glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) != GLFW_PRESS;
 
-            if (config.invert) {
+            if (config.invert)
                 singleSwap = !singleSwap;
-            }
-        } else {
+        } else
             singleSwap = !config.invert;
-        }
 
         Util.performSwap(client, singleSwap);
     }
-
 }

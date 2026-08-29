@@ -36,7 +36,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
 public abstract class MixinInGameHudSwapping {
-
     @Unique private boolean extendedHotbar$shifted;
 
     @WrapOperation(
@@ -59,9 +58,8 @@ public abstract class MixinInGameHudSwapping {
     ) {
         original.call(guiGraphics, renderPipeline, texture, x, y, width, height);
 
-        if (Util.isSwappingEnabled()) {
+        if (Util.isSwappingEnabled())
             guiGraphics.blitSprite(renderPipeline, texture, x, y + Util.DISTANCE, width, height);
-        }
     }
 
     @WrapOperation(
@@ -86,9 +84,8 @@ public abstract class MixinInGameHudSwapping {
     ) {
         original.call(instance, guiGraphics, x, y, deltaTracker, player, itemStack, seed);
 
-        if (Util.isSwappingEnabled()) {
+        if (Util.isSwappingEnabled())
             original.call(instance, guiGraphics, x, y + Util.DISTANCE, deltaTracker, player, player.getInventory().getItem(loopIndex + Util.SLOT_OFFSET), seed);
-        }
     }
 
     @Inject(
@@ -100,11 +97,8 @@ public abstract class MixinInGameHudSwapping {
         )
     )
     private void moveActionBarTextUp(final CallbackInfo ci, @Local(argsOnly = true) final GuiGraphics guiGraphics) {
-        // We don't need to push a matrix or reset, because the surrounding code we are injecting in
-        // to does that for us.
-        if (Util.isSwappingEnabled()) {
+        if (Util.isSwappingEnabled())
             guiGraphics.pose().translate(0, Util.DISTANCE);
-        }
     }
 
     @Inject(

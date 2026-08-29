@@ -6,6 +6,7 @@
   "client": [
     "MixinMinecraftClient",
     "fluent.MixinAbstractContainerScreenFluent",
+    "fluent.MixinCreativeModeInventoryScreenFluent",
     "fluent.MixinInGameHudFluent",
     "fluent.MixinMouseHandlerFluent",
     "swapping.MixinInGameHudSwapping"
