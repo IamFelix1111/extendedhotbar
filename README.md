@@ -2,7 +2,7 @@
 
 A [Fabric](https://fabricmc.net/) mod for [Minecraft](https://www.minecraft.net/) that places the bottom row of your inventory above the hotbar, doubling your quick-access slots.
 
-Latest version: **1.0.1** for Minecraft **1.21.11**.
+Latest version: **1.0.2** for Minecraft **1.21.11**.
 
 ## Features
 
